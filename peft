@@ -1,0 +1,54 @@
+PEFT:Parameter-Efficient Fine-Tuning
+
+微调数据、提示词模板、推理数据。（json）
+微调数据、推理数据
+instruction: 指令，问题描述
+input：输入，描述了上下文语境的相关信息。
+output：输出，描述了期望得到的结果。
+
+提示词模板用于生成模型的输入
+description:描述了模板的用途。
+prompt_input:包含了模板的输入部份，可以根据指令生成问题描述。
+prompt_no_input:适用于无需输入的情况。
+response_split:定义了答案的分隔符。
+
+
+LoRA微调的主要参数配置
+finetune.py的主要参数
+1.微调相关参数修改。
+--base_model:
+--data_path: 微调数据集的路徑。
+--output_dir: 微调后模型的保存路徑。
+--prompt_template_name: 提示词模板的名称，根据项目需求进行内容调整。
+--batch_size: 微调时的数据批处理大小，根据计算机算力进行调整。
+--micro_batch_size：用于将大批次拆分为多个小批次，以减少显存占有并实现梯度累加，从而优化cpu资源的使用。
+--wandb_run_name: 指定在Weights and Biases(wandb)上记录的运行名称。
+
+如： pycharm -> Run/Debug Configurations/Parameters
+--base_mode
+Qwen/Wen1.5-0.5B
+--data_path
+./data/agent-data.json
+--output_dir
+./lora-agent-med-finetune
+--prompt_template_name
+med_template
+--micro_batch_size
+128
+--wandb_run_name
+finetune
+
+
+LoRA微调参数配置
+lora_r: LoRA微调的秩
+lora_alpha: 影响放大倍数
+lora_dropout: 微调中丢失的概率
+lora_target_modules: LoRA需要微调的参数列表
+
+num_train_epochs: 微调的总轮数
+learning_rate: 学习率
+optim: 优化器，如adamw_torch.
+fp16:
+
+
+
