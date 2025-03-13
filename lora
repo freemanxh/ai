@@ -24,6 +24,11 @@ docker run --gpus=all \
 通过，Llama.cpp量化
 3.1 sudo apt install cmake
 3.2 git clone https://github.com/ggerganov/llama.cpp
+3.2 new conda env  and activate env #name：llama_cpp
+3.3 pip install -r requirements/requirements-convert-hf-to-gguf.txt
+3.4 cmake -B build
+3.5 cmake --build build --config Release
+
 
 
 
