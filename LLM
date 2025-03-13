@@ -1,0 +1,5 @@
+1、指令调整大语言模型（Instruction Tuned LLM） 采用人类反馈强化学习RLHF（Reinforcement Learning from Human Feedback）
+2、LLM的问题：Token数量限制、实时更新、缺乏对外部世界的感知、短期记忆问题、多任务处理能力不足、数据偏差、泛化能力、可解释性问题、缺乏创新和想像力。
+
+semantic kernel
+modelscope-agent
