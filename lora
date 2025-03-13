@@ -6,6 +6,18 @@ lora不需要调整所有的参数，仅需要更新一小部份低秩矩阵。
 2.1:https://github.com/hiyouga/LLaMA-Factory
 2.2:bitsandbytes-0.39  #-0.48.3  bitsandbytes是对CUDA自定义函数的轻量级封装，特别是针对8位优化器、矩阵乘法（LLM.int8()）和量化函数。
 2.3:tensorboard torch torchvision torchaudio
+2.4: docker build -f ./Dockerfile -t llama-factory:latest .
+docker run --gpus=all \
+  -v ./hf_cache:/root/.cache/huggingface/ \
+  -v ./data:/app/data \
+  -v ./output:/app/output \
+  -e CUDA_VISIBLE_DEVICES=0 \
+  -p 7860:7860 \
+  --shm-size 16G \
+  --name llama_factory \
+  -d llama-factory:latest
+
+
 
 
 
