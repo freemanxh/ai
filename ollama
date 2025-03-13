@@ -1,3 +1,15 @@
+serve 启动
+create 从Modelfile创建
+show 看info
+run 
+pull
+push
+list
+cp
+rm
+
+
+
 1、安装ollama
 1)curl -L https://ollama.com/download/ollama-linux-amd64.tgz -o ollama-linux-amd64.tgz
 2)sudo tar -C /usr -xzf ollama-linux-amd64.tgz
