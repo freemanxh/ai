@@ -17,6 +17,15 @@ docker run --gpus=all \
   --name llama_factory \
   -d llama-factory:latest
 
+2.5 损失图意义：
+2.5.1 收敛
+收敛：损失值随着训练的进行不断降低，并趋近某个稳定值，则表明llm正在学习，并逼近最佳解。下降并逐渐平稳的曲线。
+未收敛：如果波动很大，没有学习到，需要调整超参数或优化方法。
+2.5.2 拟合
+过拟合：损失值持续降低，验证损失值降到一定后开始上升，训练集上好，测试集上不行。
+欠拟合：训练与验证损失值在较高水平，没有明显下降，模型复杂度不够。
+
+
 
 
 
@@ -35,6 +44,16 @@ python convert-hf-to-gguf.py /opt/modes/2024-1 --outtype f16 --outfile /opt/2024
 应用q4_0量化方法。
 ./quantize /opt/2024-2-2-llama3-zh.gguf /opt/modes/2024-2-2-llama3-zh.gguf q4_0
 
+4、部署模型（ollama）
+4.1 Modelfile
+/home/yematech/Modelfile
+FROM /data/open-webui/models/2024-2-2-llama3-zh.gguf
+EOF
+
+4.2 create model
+ollama create llama3-Chinese:8B -f Modelfile
+
+4.3 run modle
 
 
 
