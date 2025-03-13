@@ -20,4 +20,12 @@ docker run --gpus=all \
 
 
 
+3、微调涉及量化。   
+通过，Llama.cpp量化
+3.1 sudo apt install cmake
+
+
+
+
+
 
