@@ -21,13 +21,19 @@ docker run --gpus=all \
 
 
 3、微调涉及量化。   
-通过，Llama.cpp量化
+使用Llama.cpp量化
 3.1 sudo apt install cmake
 3.2 git clone https://github.com/ggerganov/llama.cpp
-3.2 new conda env  and activate env #name：llama_cpp
-3.3 pip install -r requirements/requirements-convert-hf-to-gguf.txt
-3.4 cmake -B build
-3.5 cmake --build build --config Release
+3.3 new conda env  and activate env #name：llama_cpp
+3.4 pip install -r requirements/requirements-convert-hf-to-gguf.txt
+3.5 cmake -B build
+3.6 cmake --build build --config Release
+
+3.7 模型转换
+python convert-hf-to-gguf.py /opt/modes/2024-1 --outtype f16 --outfile /opt/2024-2-2-llama3-zh.gguf
+3.8 模型量化（q4_0）
+应用q4_0量化方法。
+./quantize /opt/2024-2-2-llama3-zh.gguf /opt/modes/2024-2-2-llama3-zh.gguf q4_0
 
 
 
