@@ -54,3 +54,16 @@ sudo systemctl enable ollama
 6)start Ollama
 sudo systemctl start ollama
 sudo systemctl status ollama
+
+
+
+2、部署模型（ollama）
+2.1 Modelfile
+/home/yematech/Modelfile
+FROM /data/open-webui/models/2024-2-2-llama3-zh.gguf
+EOF
+
+2.2 create model
+ollama create llama3-Chinese:8B -f Modelfile
+
+2.3 run modle
