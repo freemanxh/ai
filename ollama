@@ -18,6 +18,11 @@ rm
 
 5)将Ollama设置为系统启动时自动运行（建议）
 sudo useradd -r -s /bin/false -U -m -d /usr/share/ollama ollama
+  -r 为系统用户
+  -s /bin/false 防止交互式登录
+  -U 创建同名的用户组
+  -m 创建用户的主目录
+  -d 指定用户的主目录
 sudo usermod -a -G ollama $(whoami)
 
 /etc/systemd/system/ollama.service
@@ -35,6 +40,8 @@ Environment="PATH=$PATH"
 
 [Install]
 WantedBy=default.target
+
+==============================================================
 
 sudo systemctl daemon-reload
 sudo systemctl enable ollama
