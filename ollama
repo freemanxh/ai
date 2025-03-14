@@ -16,6 +16,10 @@ rm
 3)start:  ollama serve
 4)ollama -v
 
+
+需要注意 AppArmor 对服务的影响，目前不太清楚作用 
+sudo systemctl status apparmor
+
 5)将Ollama设置为系统启动时自动运行（建议）
 sudo useradd -r -s /bin/false -U -m -d /usr/share/ollama ollama
   -r 为系统用户
@@ -32,8 +36,8 @@ After=network-online.target
 
 [Service]
 ExecStart=/usr/bin/ollama serve
-User=ollama
-Group=ollama
+User=ollama  #此处要改为yematech
+Group=ollama #此处要改为yematech 目前不知道低原因
 Restart=always
 RestartSec=3
 Environment="PATH=$PATH"
