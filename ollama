@@ -41,6 +41,7 @@ Group=ollama #此处要改为yematech 目前不知道低原因
 Restart=always
 RestartSec=3
 Environment="PATH=$PATH"
+Environment="OLLAMA_HOST=0.0.0.0:11434"
 
 [Install]
 WantedBy=default.target
