@@ -1,3 +1,30 @@
 1、安装
 pip install langchain-core langchain-community langchain-openai
 
+
+3.1 LangChain的模块
+3.1.1 模块
+Model I/O 模块(语言模型 指令 输出解析器)
+检索模块（向量数据及外部数据）
+内存
+链
+代理（Agent）
+回调
+
+
+
+3.2
+3.2.1 LangSmith
+3.2.2 调试LLM应用
+langchain.debug=True
+langchain.verbose=True
+
+3.3 langchain回退
+有效的容错策略，旨在确保调用API失败或性能下降时，能维护正常的运行状态。
+3.3.1 处理LLM调用API的错误
+llmOpenAI=ChatOpenAI()
+llmOllama=ChatOllama()
+llm=llmOpenAI.with_fallbacks([llmOllama])
+
+
+
