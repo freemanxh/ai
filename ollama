@@ -36,8 +36,10 @@ After=network-online.target
 
 [Service]
 ExecStart=/usr/bin/ollama serve
-User=ollama  #此处要改为yematech
-Group=ollama #此处要改为yematech 目前不知道低原因
+#以下此处要改为yematech
+User=ollama
+#以下此处要改为yematech 目前不知道什么原因
+Group=ollama
 Restart=always
 RestartSec=3
 Environment="PATH=$PATH"
