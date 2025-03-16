@@ -26,5 +26,8 @@ llmOpenAI=ChatOpenAI()
 llmOllama=ChatOllama()
 llm=llmOpenAI.with_fallbacks([llmOllama])
 
+3.3.2
+AsyncCallbacks.py 重点复习
+
 
 
