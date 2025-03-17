@@ -30,6 +30,24 @@ llm=llmOpenAI.with_fallbacks([llmOllama])
 AsyncCallbacks.py 重点复习
 
 
+
+4.1.6 缓存
+1）内存缓存
+from langchain_community.cache import InMemoryCache
+from langchain.globals import set_llm_cache
+
+langchain.llm_cache = InMemoryCache()
+#set_llm_cache(InMemoryCache())
+llm.invoke("first test cache")
+llm.invoke("first test cache")
+
+2)SQLite缓存
+from langchain.cache import SQLiteCache
+langchain.llm_cache=SQLiteCache(database_path=".langchain.db")
+llm.invoke("first test cache")
+llm.invoke("first test cache")
+
+
 5.编写Prompt的策略
 5.1 使用明确且具体的指令
 5.2 添加明确的语法
