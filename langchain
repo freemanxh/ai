@@ -47,6 +47,12 @@ langchain.llm_cache=SQLiteCache(database_path=".langchain.db")
 llm.invoke("first test cache")
 llm.invoke("first test cache")
 
+3)序列化LLM配置
+llm.save("llm.json")
+llm.save("llm.yaml")
+from langchain_community.llms.loading import load_llm
+load_llm(filename)
+
 
 5.编写Prompt的策略
 5.1 使用明确且具体的指令
