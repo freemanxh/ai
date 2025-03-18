@@ -40,10 +40,20 @@ collection使用
 2)add(ids=["id1","id2","id3"],metadatas=[{"source1":"s1"},{"source2":"s2"},{"source3":"se"}],documents=["first","second","third"])
 3)get() ids,where,limit,offset
 4)peek()
-5)query()  query_embeddings,query_texts,n_results
+5)query()  query_embeddings,query_texts,n_results,
+  where #根据元数据筛选,
+    {
+      "metadata_field": {
+        "<Operator>": "<Value>"
+      }
+    }
+    $eq $ne $gt $gte $lt $lte
+  where_document #根据文档进行筛选
+  $contains $and $or $in $nin
 6)update() ids
 7)upsert()
 8)delete()
+9)modify(name="new_name") 重命名集合
 
 
 
