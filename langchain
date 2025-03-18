@@ -133,6 +133,24 @@ UnstructuredPDFLoader
   unstructured_inference
   pdf2image
 
+拆分
+RecursiveCharacterTextSplitter
+  length_function 计算长度的函数
+  chunk_size 每个块的大小
+  chunk_overlap 重叠块大小
+  add_start_index 块中包含起始位置
+  .from_language(lnaguage=Language.PYTHON,)
+
+CharacterTextSplitter
+  separator="\n\n"
+  chunk_size 每个块的大小
+  chunk_overlap 重叠块大小
+  add_start_index 块中包含起始位置
+  is_separator_regex
+
+  length_function 计算长度的函数
+
+
 
 
 
