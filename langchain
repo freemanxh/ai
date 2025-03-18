@@ -1,3 +1,5 @@
+以下的langchain的版本为0.38
+
 1、安装
 pip install langchain-core langchain-community langchain-openai
 
@@ -59,7 +61,26 @@ model_lab=ModelLaboratory.from_llms(llms)
 model_lab.compare(message)
 
 
+4.4 解析器
+4.4.1 列表解析器
+from langchain_core.output_parsers import CommaSeparatedListOutputParser
+output_parser = CommaSeparatedListOutputParser()
+format_instructions = output_parser.get_format_instructions()
+prompt = PromptTemplate(
+    template="List five {subject}.\n{format_instructions}",
+    input_variables=["subject"],
+    partial_variables={"format_instructions": format_instructions}
+)
+...
+output_parser.parse(response.content)
 
+4.4.2 日期时间解析器
+from langchain.output_parsers import DatetimeOutputParser
+prompt = PromptTemplate.from_template(template, partial_variables={"format_instructions": output_parser.get_format_instructions()})
+prompt = PromptTemplate.from_template(template, partial_variables={
+chain=prompt | llm
+
+4.4.3 Json解析器
 
 
 5.编写Prompt的策略
@@ -76,6 +97,24 @@ model_lab.compare(message)
 5.9 限定结构化输出
 5.10 指定完成任务所需的步骤
 5.11 设定角色与人物
+
+6.Prompt模板
+1）字符串模板
+PromptTemplate
+PromptTemplate.from_template()
+
+2）聊天指令模板
+每条消息均包含内容，且附加role参数
+ChatPromptTemplate
+ChatPromptTemplate.from_message()
+
+AIMessagePromptTemplate
+SystemMessagePromptTemplate
+HumanMessagePromptTemplate
+
+ChatMessagePromptTemplate
+1
+
 
 
 
