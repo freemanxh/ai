@@ -53,6 +53,14 @@ llm.save("llm.yaml")
 from langchain_community.llms.loading import load_llm
 load_llm(filename)
 
+4)llm比较
+from langchain.model_laboratory import ModelLaboratory
+model_lab=ModelLaboratory.from_llms(llms)
+model_lab.compare(message)
+
+
+
+
 
 5.编写Prompt的策略
 5.1 使用明确且具体的指令
