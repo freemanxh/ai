@@ -25,7 +25,7 @@ client:
 
 
 client使用
-1）heartbeat()
+1)heartbeat()
 2)list_collections()
 3)create_collection(name="",metadata={})
 4)get_collection(name)
@@ -34,6 +34,18 @@ client使用
 7)reset() #重置数据库，相当危险
 8)get_version()
 9)get_settings()
+
+collection使用
+1)count()
+2)add(ids=["id1","id2","id3"],metadatas=[{"source1":"s1"},{"source2":"s2"},{"source3":"se"}],documents=["first","second","third"])
+3)get() ids,where,limit,offset
+4)peek()
+5)query()  query_embeddings,query_texts,n_results
+6)update() ids
+7)upsert()
+8)delete()
+
+
 
 
 
