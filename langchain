@@ -116,5 +116,23 @@ ChatMessagePromptTemplate
 1
 
 
+7.数据
+TextLoader
+CSVLoader
+DirectoryLoader
+  use_multithreading=True
+  loader_cls=[TextLoader|PythonLoader]
+  silent_errors=True #skip error file
+    text_load_kwargs={'autodetect_encoding': True} #文件编码自动检测
+  loader_kwargs=text_load-kwargs
+UnstructuredHTMLLoader
+
+UnstructuredPDFLoader
+  pdfminer要装pdfminer.six这个版本
+  pi_heif
+  unstructured_inference
+  pdf2image
+
+
 
 
