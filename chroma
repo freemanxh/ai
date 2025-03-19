@@ -1,6 +1,6 @@
 server:
 1、安装
-  docker pull docker pull chromadb/chroma
+  docker pull chromadb/chroma
   docker run -d -v ./chroma_data:/chroma/chroma -p 8000:8000 -e IS_PERSISTENT=TRUE --name chromadb  chromadb/chroma:latest
 
 client:
