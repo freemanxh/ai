@@ -150,6 +150,15 @@ CharacterTextSplitter
 
   length_function 计算长度的函数
 
+8.2使用redis缓存向量
+store = RedisStore(redis_url="redis://192.168.0.222:6379", client_kwargs={'db': 2}, namespace='embedding_caches')
+underlying_embeddings = OllamaEmbeddings(model="nomic-embed-text", base_url=os.getenv("OLLAMA_URL"))
+embedder = CacheBackedEmbeddings.from_bytes_store(
+    underlying_embeddings, store, namespace=underlying_embeddings.model
+)
+embeddings = embedder.embed_documents(["hello", "goodbye"])
+print(list(store.yield_keys()))
+
 
 
 
