@@ -160,6 +160,27 @@ embeddings = embedder.embed_documents(["hello", "goodbye"])
 print(list(store.yield_keys()))
 
 
+9.记忆
+记忆的类型
+1）会话内存
+ConversationBufferMemory
+2)滑动窗口内存
+ConversationBufferWindowMemory
+3)实体内存
+ConversationEntityMemory
+4)知识图谱会话内存
+ConversationKGMemory
+5)会话摘要内存
+ConversationSummaryMemory
+6)会话摘要缓存内存
+ConversationSummaryBufferMemory
+7)会话Token缓存内存
+ConversationTokenBufferMemory
+8)向量存储检索内存
+VectorStoreRetrieverMemrory
+
+
+
 
 
 
