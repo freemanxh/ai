@@ -57,7 +57,7 @@ collection使用
 9)modify(name="new_name") 重命名集合
 
 
-实战：
+实战（与Ollama进行结合）：
 1、切分文档
 loader = TextLoader("./elon_musk.txt")
 documents = loader.load()
