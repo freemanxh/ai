@@ -57,6 +57,51 @@ collection使用
 9)modify(name="new_name") 重命名集合
 
 
+实战：
+1、切分文档
+loader = TextLoader("./elon_musk.txt")
+documents = loader.load()
+
+text_splitter = CharacterTextSplitter(chunk_size=500, chunk_overlap=0)
+docs = text_splitter.split_documents(documents)
+
+2、使用Ollama中的Embeddings模型 
+ollamaEmbeddings = OllamaEmbeddings(model="nomic-embed-text", base_url=os.getenv("OLLAMA_URL"))
+ollamaEmbeddings = OllamaEmbeddings(model="bge-m3:latest", base_url=os.getenv("OLLAMA_URL"))
+
+ollamaEmbeddings.embed_query(str)
+ollamaEmbeddings.embed_documents(list)
+
+必须实现自定义的EmbeddingFunction的接口(以下两个接口都只支持数组，如果是文本，得改实现方法。)
+class CustomEmbeddingFunction(EmbeddingFunction):
+    def __call__(self, texts):
+        embeddings = [ollamaEmbeddings.embed_query(x) for x in texts]
+        return embeddings
+
+class CustomEmbeddingFunction(EmbeddingFunction):
+    def __call__(self, texts):
+        return ollamaEmbeddings.embed_documents(texts)
+
+cef = CustomEmbeddingFunction()
+
+chroma_client = chromadb.HttpClient(host="192.168.0.6", port=8000)
+coll = chroma_client.get_or_create_collection("test101", embedding_function=cef)
+coll.add(ids=ids, metadatas=metadatas, documents=documents)
+
+coll.get(ids=['id_1'],include=['embeddings']) #如果要看向量，必须include 'embeddings',但在实际的使用过程中，没有必要查看此项。
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
