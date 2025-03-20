@@ -3,9 +3,10 @@ server:
   docker pull chromadb/chroma
   docker run -d -v ./chroma_data:/chroma/chroma -p 8000:8000 -e IS_PERSISTENT=TRUE --name chromadb  chromadb/chroma:latest
 
+
 client:
 1、安装
-  pip install chromadb
+  pip install chromadb-client  #当然，也可以安装 pip install chromadb
 
   import chromadb
   client=chromadb.HttpClient(host="192.168.0.6",port=8000)
