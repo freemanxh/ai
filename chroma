@@ -39,7 +39,7 @@ client使用
 collection使用
 1)count()
 2)add(ids=["id1","id2","id3"],metadatas=[{"source1":"s1"},{"source2":"s2"},{"source3":"se"}],documents=["first","second","third"])
-3)get() ids,where,limit,offset
+3)get() ids,where,limit,offset  #如果要看向量 加上include=['embeddings']
 4)peek()
 5)query()  query_embeddings,query_texts,n_results,
   where #根据元数据筛选,
