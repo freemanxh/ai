@@ -180,6 +180,21 @@ ConversationTokenBufferMemory
 VectorStoreRetrieverMemrory
 
 
+11.工具
+工具的关键要素。
+1）名称：用以标识和引用。
+2）描述：阐明工具的功能和用途。
+3）JSON模式：定义了输入数据和结构和格式。
+4）调用函数：实现具具体的功能。
+5）标志：指示是否应直接将工具结果返回给用户。
+
+内置工具：
+Apify
+Shell
+Bing Search
+File System
+Memorize #微调LLM，以实现信息的记忆功能，需要支持微调的LLM
+SQL Database
 
 
 
