@@ -57,6 +57,8 @@ sudo systemctl enable ollama
 sudo systemctl start ollama
 sudo systemctl status ollama
 
+如果启动出现问题
+journalctl -u ollama
 
 
 2、部署模型（ollama）
