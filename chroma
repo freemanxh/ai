@@ -24,7 +24,7 @@ client:
     model_name="text-embedding-ada-002"
   )
 
-
+6、client与collection相关的api
 client使用
 1)heartbeat()
 2)list_collections()
