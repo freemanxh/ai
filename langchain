@@ -196,6 +196,10 @@ File System
 Memorize #微调LLM，以实现信息的记忆功能，需要支持微调的LLM
 SQL Database
 
+自定义工具：
+1）使用@tool装饰器
+
+
 
 
 
