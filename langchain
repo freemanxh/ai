@@ -198,7 +198,61 @@ SQL Database
 
 自定义工具：
 1）使用@tool装饰器
+@tool
+def search(query: str) -> str:
+    """在网上查东西"""
+    return "LangChain"
 
+@tool("search-tool", args_schema=SearchInput, return_direct=True)
+def search(query: str) -> str:
+    """在网上查东西。"""
+    return "LangChain"
+
+2）使用StructuredTool
+from pydantic.v1 import BaseModel, Field
+class CalculatorInput(BaseModel):
+    a: int = Field(description="第一个数字")
+    b: int = Field(description="第二个数字")
+
+
+def multiply(a: int, b: int) -> int:
+    """将两个数字相乘"""
+    return a * b
+
+
+calculator = StructuredTool.from_function(
+    description="相乘",
+    name="计算器",
+    func=multiply,
+    args_schema=CalculatorInput,
+    return_direct=True
+)
+
+3)agent调用(没有怎么搞明白)
+
+llm = ChatOllama(model=os.getenv("LLM_NAME"), base_url=os.getenv("OLLAMA_URL"))
+
+
+def _should_check(serialized_obj: dict) -> bool:
+    return serialized_obj.get("name") == "terminal"
+
+
+def _approve(_input: str) -> bool:
+    if _input == "echo 'Hello World'":
+        return True
+
+    msg = ("你是否批准以下输入？",
+           "'Y'/'Yes'(不分大小写)之外的任务内容都将被视为'否'")
+    msg += "\n\n" + _input + "\n"
+    resp = input(msg)
+    return resp.lower() in ("yes", "y")
+
+
+callbacks = [HumanApprovalCallbackHandler(should_check=_should_check, approve=_approve)]
+tools = load_tools(["terminal", "wikipedia", "llm-math"], llm=llm)
+agent = initialize_agent(tools, llm, agent=AgentType.ZERO_SHOT_REACT_DESCRIPTION)
+
+agent.run("现在是2024年，康拉德.阿登纳在哪一年成为德国总理？", callbacks=callbacks)
 
 
 
