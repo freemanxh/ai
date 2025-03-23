@@ -108,13 +108,18 @@ def zhaojia(condition: str) -> str:
     """供造价问题调用"""
     return "hahaha调用我了"+condition+"：一立方米为1000元"
 
+def parsing_multiplier(string: str):
+    a, b = string.split(",")
+    return multiplier(int(a),int(b))
+
 
 tool = StructuredTool.from_function(multiplier)
 tool2 = StructuredTool.from_function(zhaojia)
 
 # 结构化工具与Structured_CHAT_ZERO_SHOT_RACT_DESCRIPTION代理类型兼容。
 agent_executor = initialize_agent(
-    [tool, tool2],
+    [tool, tool2,Tool(name="parsing_Multiplier", func=parsing_multiplier,
+                       description="该工具的输入应该是一个以逗号分隔的长度为2的数字列表，表示要相加的两个数字。例如，如果要将1+2，则输入`1,2`。"],
     llm,
     agent=AgentType.STRUCTURED_CHAT_ZERO_SHOT_REACT_DESCRIPTION,
     verbose=True,
