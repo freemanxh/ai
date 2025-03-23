@@ -94,6 +94,39 @@ coll.get(ids=['id_1'],include=['embeddings']) #如果要看向量，必须includ
 
 
 
+tools 的使用成功代码
+
+llm = ChatOllama(model=os.getenv("LLM_NAME"), base_url=os.getenv("OLLAMA_URL"))
+
+
+def multiplier(a: float, b: float) -> float:
+    """将提供的浮点相加。"""
+    return a + b
+
+
+def zhaojia(condition: str) -> str:
+    """供造价问题调用"""
+    return "hahaha调用我了"+condition+"：一立方米为1000元"
+
+
+tool = StructuredTool.from_function(multiplier)
+tool2 = StructuredTool.from_function(zhaojia)
+
+# 结构化工具与Structured_CHAT_ZERO_SHOT_RACT_DESCRIPTION代理类型兼容。
+agent_executor = initialize_agent(
+    [tool, tool2],
+    llm,
+    agent=AgentType.STRUCTURED_CHAT_ZERO_SHOT_REACT_DESCRIPTION,
+    verbose=True,
+)
+
+# agent_executor.invoke("2 + 7是多少？")
+agent_executor.invoke("这个材料值多少钱，混凝土一立方米?")
+
+
+
+
+
 
 
 
