@@ -1,5 +1,13 @@
 以下的langchain的版本为0.38
 
+六大模块：
+模型I/O
+检索
+Agent
+Chains
+Memory
+Callbacks
+
 1、安装
 pip install langchain-core langchain-community langchain-openai
 
