@@ -1,4 +1,4 @@
-1、LM Studio
+I1、LM Studio
 正常运行LM-Studio就好，如果不能运行则用sudo运行 sudo ./LM-Studio-0.3.12-1-x64.AppImage --no-sandbox
 加载模型时，/home/xuhui/.lmstudio/models/  放在这个目录中,且每个模型得有一个目录，比如Qwen
 
@@ -29,3 +29,17 @@ G:基于检索结果增强Prompt激活LLM以生成答案。
 phidata库  pip install -U phidata
 
 https://zhuanlan.zhihu.com/p/16288218850
+
+
+===============================================================================
+
+输入模型的信息从简单到复杂：提示工程、大模型微调、RAG、Agent
+对大模型的能力要求：提示工程、RAG、Agent、大模型微调
+人工智能的5个层级
+L1 TOOL 全人工 | offiece等
+L2 Chatbot 人完成绝大部份，AI提供信息建议，不直接参与工作 | 初代ChatGPT
+L3 Copilot 人类和AI共同完成，AI完成初稿，人类校正、修改、调整。 | Copilot
+L4 Agent AI完成绝大部份工作，人设定目标、提供资源与监督结果，最终决策。AI任务拆分、工具选择、进度控制。 | AutoGPT
+L5 Intel-ligence 完全无须人类监督，AI自主拆解目标，找资源，选择工具。人类只给出初始目标。 
+
+
