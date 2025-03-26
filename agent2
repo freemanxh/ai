@@ -58,6 +58,19 @@ LangChain LlamaIndex OpenAI_API(assistants)
 
 bing:Custome Configuration ID  :  47b0a9f6-6fda-4b24-9ec4-c8db2a55e3bd
 
+======================================================================
+用langchain比较多个模型:ModelLaboratory
+model_lab=ModelLaboratory.from_llms([OpenAI,cohere,huggingface])
+model_lab.compare("百合花源自哪个国家?")
+
+LCEL的特点：
+1、流式处理
+2、异步操作
+3、并行执行
+4、允许配置重试和后备选项
+5、允许复杂链的中间结果
+
+
 
 
 
