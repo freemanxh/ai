@@ -34,3 +34,118 @@ poetry install
 8.执行数据库迁移，将数据库结构迁移至最新版本
 进入虚拟场景：poetry shell
 进行数据库迁移命令： flask db upgrade
+
+
+
+=======================================================================================================
+
+sudo aptitude install command-not-found
+
+1、下载源码
+git clone https://github.com/langgenius/dify.git
+2、进入docker文件夹
+cp middleware.env.example middleware.env
+3、启动docker compose
+docker compose -f ./docker-compose.middleware.yaml up -d
+4、测试postgresql
+192.168.0.199:5432
+db_name:dify
+username:postgres
+password:difyai123456
+
+
+开发环境
+api文件夹
+3.复制环境变量配置文件
+cp .env.example .env
+4.生成随机密钥，并替换 .env 中 SECRET_KEY 的值（如不用命令可手动替换，未替换也并不影响服务启动）
+awk -v key="$(openssl rand -base64 42)" '/^SECRET_KEY=/ {sub(/=.*/, "=" key)} 1' .env > temp_env && mv temp_env .env
+5.poetry安装
+可通过命令安装： pip install poetry
+
+换源
+全局：
+poetry source add pypi-tuna https://pypi.tuna.tsinghua.edu.cn/simple #下次先试这个
+poetry config repositories.pypi https://pypi.tuna.tsinghua.edu.cn/simple   
+export POETRY_HTTP_TIMEOUT=60
+如果发现装不了lock了，运行  poetry lock
+
+当前项目：
+poetry config repositories.pypi https://mirrors.aliyun.com/pypi/simple/ --local
+查看换源配置：poetry config --list
+
+6.使用poetry生成虚拟环境（这里用的是python3.12版本）
+poetry env use 3.12  (可以在conda环境中)
+7.使用poetry拉去依赖
+poetry install
+8.执行数据库迁移，将数据库结构迁移至最新版本
+进入虚拟场景：poetry env activate
+进行数据库迁移命令： flask db upgrade
+
+python3 -m pip install Flask-Migrate alembic
+
+python3 -m pip install pydantic
+
+python3 -m pip install pyyaml
+
+python3 -m pip install pyyarl
+
+python3 -m pip install redis
+
+python3 -m pip install flask_restful
+
+python3 -m pip install Crypto
+
+pip install pycryptodome
+
+python3 -m pip install gmpy2
+
+python3 -m pip install celery
+
+python3 -m pip install deprecated
+
+python3 -m pip install pydantic_settings
+
+python3 -m pip install psycopg2
+
+python3 -m pip install jwt
+
+python3 -m pip install tenacity
+
+python3 -m pip install pydantic_extra_types
+
+numpy validators pandas 
+
+sudo aptitude install libffi-dev
+
+python3 -m pip install openpyxl
+
+bs4
+
+pypandoc
+
+python-docx
+
+cachetools
+
+langfuse
+
+langsmith
+
+openai
+
+msal_extensions
+
+opendal
+
+flask_cors
+
+pypdfium2
+
+chardet
+
+cloudscraper
+
+regex
+
+boto3
