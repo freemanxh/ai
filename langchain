@@ -1,5 +1,8 @@
 fastapi
 asyncio
+markdown
+yaml
+
 
 
 以下的langchain的版本为0.38
