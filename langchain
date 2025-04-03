@@ -1,3 +1,7 @@
+fastapi
+asyncio
+
+
 以下的langchain的版本为0.38
 
 六大模块：
