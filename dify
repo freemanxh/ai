@@ -28,3 +28,9 @@ awk -v key="$(openssl rand -base64 42)" '/^SECRET_KEY=/ {sub(/=.*/, "=" key)} 1'
 查看换源配置：poetry config --list
 
 6.使用poetry生成虚拟环境（这里用的是python3.12版本）
+poetry env use 3.12  (可以在conda环境中)
+7.使用poetry拉去依赖
+poetry install
+8.执行数据库迁移，将数据库结构迁移至最新版本
+进入虚拟场景：poetry shell
+进行数据库迁移命令： flask db upgrade
