@@ -1,0 +1,73 @@
+serve 启动
+create 从Modelfile创建
+show 看info
+run 
+pull
+push
+list
+cp
+rm
+
+
+
+1、安装ollama
+1)curl -L https://ollama.com/download/ollama-linux-amd64.tgz -o ollama-linux-amd64.tgz
+2)sudo tar -C /usr -xzf ollama-linux-amd64.tgz
+3)start:  ollama serve
+4)ollama -v
+
+
+需要注意 AppArmor 对服务的影响，目前不太清楚作用 
+sudo systemctl status apparmor
+
+5)将Ollama设置为系统启动时自动运行（建议）
+sudo useradd -r -s /bin/false -U -m -d /usr/share/ollama ollama
+  -r 为系统用户
+  -s /bin/false 防止交互式登录
+  -U 创建同名的用户组
+  -m 创建用户的主目录
+  -d 指定用户的主目录
+sudo usermod -a -G ollama $(whoami)
+
+/etc/systemd/system/ollama.service
+[Unit]
+Description=Ollama Service
+After=network-online.target
+
+[Service]
+ExecStart=/usr/bin/ollama serve
+#以下此处要改为yematech
+User=ollama
+#以下此处要改为yematech 目前不知道什么原因
+Group=ollama
+Restart=always
+RestartSec=3
+Environment="PATH=$PATH"
+Environment="OLLAMA_HOST=0.0.0.0:11434"
+
+[Install]
+WantedBy=default.target
+
+==============================================================
+
+sudo systemctl daemon-reload
+sudo systemctl enable ollama
+
+6)start Ollama
+sudo systemctl start ollama
+sudo systemctl status ollama
+
+如果启动出现问题
+journalctl -u ollama
+
+
+2、部署模型（ollama）
+2.1 Modelfile
+/home/yematech/Modelfile
+FROM /data/open-webui/models/2024-2-2-llama3-zh.gguf
+EOF
+
+2.2 create model
+ollama create llama3-Chinese:8B -f Modelfile
+
+2.3 run modle
