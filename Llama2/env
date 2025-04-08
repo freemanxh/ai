@@ -1,5 +1,5 @@
 部署text-generation-webui 的lora时没有搞定 p28
-部署api方式没有成功，因为autogptq没有安装成功，p24
+部署api方式没有成功，因为autogptq没有安装成功，应该是cuda版本为11.8才行，p24
 
 
 1、部署
