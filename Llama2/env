@@ -1,5 +1,11 @@
+1、部署
+1.1 源码部署 
 llama2源地址：
 git clone https://github.com/pengwei-iie/Llama2-Chinese.git
+
+model:
+Atom-7B
+Atom-7b-Chat
 
 需要保证bitsandbytes版本最高 
 pip install --upgrade bitsandbytes
@@ -39,3 +45,36 @@ numpy
 pyyaml
 datasets
 psutil
+
+启动运行脚本
+test.py
+import torch
+from transformers import AutoTokenizer, AutoModelForCausalLM
+
+model_path = "/home/xuhui/models/Llama/Atom-7B-Chat"
+
+model = AutoModelForCausalLM.from_pretrained(model_path, device_map='auto', torch_dtype=torch.float16,
+                                             load_in_8bit=True)
+model = model.eval()
+tokenizer = AutoTokenizer.from_pretrained(model_path, use_fast=False)
+tokenizer.pad_token = tokenizer.eos_token
+input_ids = tokenizer(['<s>Human: 如何向一个六岁的孩子解释什么是机器学习\n</s><s>Assistant: '], return_tensors="pt",
+                      add_special_tokens=False).input_ids.to('cuda')
+generate_input = {
+    "input_ids": input_ids,
+    "max_new_tokens": 512,
+    "do_sample": True,
+    "top_k": 50,
+    "top_p": 0.95,
+    "temperature": 0.3,
+    "repetition_penalty": 1.3,
+    "eos_token_id": tokenizer.eos_token_id,
+    "bos_token_id": tokenizer.bos_token_id,
+    "pad_token_id": tokenizer.pad_token_id
+}
+generate_ids = model.generate(**generate_input)
+text = tokenizer.decode(generate_ids[0])
+print(text)
+
+1.2 FastAPI部署
+
