@@ -1,0 +1,16 @@
+text-generation-webui
+
+1、conda create -n tgw python=3.9
+conda activate tgw
+
+2、git clone https://github.com/oobabooga/text-generation-webui.git
+cd text-generation-webui
+
+3、pip install -r requirements.txt
+
+4、pip install bitsandbytes
+
+5、pip install xformers
+
+6、python server.py
+python server.py --model llama-7b-hf --lora Llama2-7b 
