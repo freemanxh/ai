@@ -5,7 +5,8 @@ git clone https://github.com/pengwei-iie/Llama2-Chinese.git
 pip install --upgrade bitsandbytes
 
 使用成功的requirements.txt
-bitsandbytes==0.39.0
+#bitsandbytes==0.39.0
+bitsandbytes==0.45.4
 accelerate==0.21.0
 #deepspeed==0.10.0
 #git+https://github.com/PanQiWei/AutoGPTQ.git
