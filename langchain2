@@ -97,7 +97,7 @@ D Document Transformers 对文档进行切割、组合、过滤。 将加载的�
 V VectorStore  最相似
 R Retriever
 
-文档数据 向量数据
+文档数据：包含文本及相关元数据 向量数据
 
 加载器
 1、txt
@@ -120,12 +120,30 @@ R Retriever
   PDFMinerLoader
   PyMuPDFLoader
 
-  
-
 三大模型包装器（Embeddings、LLM、Chat Model）
 Embeddings 嵌入方法 
 embed_documents 
 embed_query
+
+
+文档转换器
+两个步骤：1、对文档进行切割。2、将切割后的文档转换为Document数据格式。
+
+文档切割
+
+文档切割的意义：1、LLM平台处理长文本的能力是有限的（token限制）
+             2、文档作为一个整体无法充分发挥模型的作用。可能在语义上存在较大的差异。
+
+RecursiveCharacterTextSplitter 
+默认切割的字符：["\n\n","\n"," ",""]
+
+按字符切割 CharacterTextSplitter
+代码切割 RecursiveCharacterTextSplitter
+Markdown标题文本切割 MarkdownHeaderTextSplitter
+Token切割
+  Tiktoken 标记切割器
+
+
 
 
 
