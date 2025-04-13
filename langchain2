@@ -8,3 +8,10 @@
 序列化是指将消息对象转换为可以存储或传输的数据模式过程。
 
 提示词模版：（明确的指令、少量的示例、用户输入）
+template=("""xxx{v1}xx""")
+The_PT=PromptTemplate(input_variables,template)
+
+prompt=The_PT.format(v1="",v1="",v3="")  #format_prompt
+最主要的外部数据有 用户的输入、用户和模型的历史聊天记录、外部知识数据、程序上下文管理信息。
+
+
