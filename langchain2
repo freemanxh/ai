@@ -41,7 +41,7 @@ to_message
  序列化模板
 
 1.5输出解析器 （结构化数据）
-功能：添加提示词模板的输出指令和解析输出格式。
+1.5.1、功能：添加提示词模板的输出指令和解析输出格式。
 BooleanOutputParser
 CommaSeparatedListOutputParser 以逗号分隔的列表类型的输出
 DatetimeOutputParser 
@@ -54,7 +54,24 @@ StructuredOutputParser
  get_format_instructions()
  parse()
 
-StructuredOutputParser
+
+1.5.2、Padantic Json输出解析器
+from pydantic import BaseModel,Field,validator
+class Joke(BaseModel):
+  setup: str=Field(description="question to set up a joke")
+  punchline: str=Field(description="answer to resolve the joke")
+  #使用Pydantic添加自定义的验证逻辑
+  def question_ends_with_question_mask(cls,field):
+    if field[-1]!="?":
+      raise ValueError("Badly formed question!")
+    return field
+
+parser=PydanticOutputParser(pydantic_object=Joke)
+
+
+
+
+1.5.3、StructuredOutputParser
 response_schemas=[
   ResponseSchema(
     name="answer",
@@ -69,6 +86,50 @@ response_schemas=[
   )
 ]
 output_parser=StructuredOutputParser.from_response_schemas(response_schemas)
+format_instructions=output_parser.get_format_instructions()
+
+2、数据增加（RAG）
+LEDVR 工作流
+L Loader 
+E Text Embedding Model
+D Document Transformers 对文档进行切割、组合、过滤。 将加载的文档转换为可被嵌入模型包装器操作的文档数据格式。
+  RecursiveCharacterTextSplitter 文本切割器
+V VectorStore  最相似
+R Retriever
+
+文档数据 向量数据
+
+加载器
+1、txt
+  TextLoader
+2、csv
+  CSVLoader
+3、文件目录
+  DirectoryLoader
+4、HTML
+  BSHTMLLoader
+5、JSON (jq)
+  JSONLoader
+6、Markdown
+  UnstructuredMarkdownLoader
+7、PDF
+  MathpixPDFLoader
+  UnstructuredPDFLoader
+  OnlinePDFLoader
+  PyPDFium2Loader
+  PDFMinerLoader
+  PyMuPDFLoader
+
+  
+
+三大模型包装器（Embeddings、LLM、Chat Model）
+Embeddings 嵌入方法 
+embed_documents 
+embed_query
+
+
+
+
 
 
 
