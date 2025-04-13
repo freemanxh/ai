@@ -7,8 +7,8 @@
 
 序列化是指将消息对象转换为可以存储或传输的数据模式过程。
 
-提示词模版：（明确的指令、少量的示例、用户输入）
-PromptTemplate实例化过程，就是构造提示词。
+1.4、提示词模版：（明确的指令、少量的示例、用户输入）
+1.4.1、PromptTemplate实例化过程，就是构造提示词。
 
 template=("""xxx{v1}xx""")
 input_variables=["","",""]
@@ -28,6 +28,22 @@ format_prompt
 
 to_string
 to_message
+
+1.4.2、FewShotPromptTemplate
+ 示例选择器
+  LengthBasedExampleSelector 基于长度
+  MaxMarginalRelevanceExampleSelector 最大边际相关性
+  NGramOverlapExampleSelector 基于n-gram重叠度
+  SemanticSimilarityExampleSelector 基于相似度
+1.4.3、多功能提示词模板
+ Partial提示词模板
+ PipelinePrompt组合模板功能
+ 序列化模板
+
+1.5输出解析器
+
+
+
 
 
 
