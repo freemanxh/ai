@@ -40,7 +40,37 @@ to_message
  PipelinePrompt组合模板功能
  序列化模板
 
-1.5输出解析器
+1.5输出解析器 （结构化数据）
+功能：添加提示词模板的输出指令和解析输出格式。
+BooleanOutputParser
+CommaSeparatedListOutputParser 以逗号分隔的列表类型的输出
+DatetimeOutputParser 
+EnumOutputParser
+ListOutputParser
+PydanticOutputParser
+StructuredOutputParser
+
+两个方法：
+ get_format_instructions()
+ parse()
+
+StructuredOutputParser
+response_schemas=[
+  ResponseSchema(
+    name="answer",
+    description="answer to the user's quesion"
+  ),
+  ResponseSchema(
+    name="source",
+    description=(
+      "source used to answer the user's question,"
+      "should be a website."
+    )
+  )
+]
+output_parser=StructuredOutputParser.from_response_schemas(response_schemas)
+
+
 
 
 
