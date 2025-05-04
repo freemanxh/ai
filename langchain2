@@ -181,7 +181,7 @@ print(answer)
 
 
 
-4、Chain
+5、Chain
 链：用链将大语言模型开发的各个组件链接起来，以构建复杂的应用程序。是连接组件、管理组件数据流的"包装器"
 主要功能是管理应用程序中的数据流动，将不同的组件链接在一起，形成一个完整的数据处理流程。每一个链都是由一系列组件构成的。
 组件包括（模型I/O、记忆、回调处理、数据增强、Agent、链）
@@ -197,7 +197,20 @@ callbacks：回调函数的列表，在链执行过程中的某些时刻被调�
 verbose=True 用于调试。
 
 
+5.2 基础链类型：
+LLMChain : 由提示词模板和模型包装器组成。
+RouterChain :动态选择给定输入的下一条链。
+SequentialChain :一次调用的输出作为另一次调用的输入。
+ SimpleSequentialChain
+ SequentialChain
+TransformationChain :用于数据转换的链。
+5.3 工具链类型：
+APIChain
+ConversationalRetrievalQA
+MapReduceDocumentsChain
+StuffDocumentsChain
 
+ConstitutionalChain :输出遵循一定原则的链。
 
 
 
