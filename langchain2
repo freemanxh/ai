@@ -253,6 +253,22 @@ print(response)
 业务中，使用最多的是QA问答链、摘要链。
 
 
+6、记忆模块
+记忆组件的功能：读取和写入
+
+内置记忆组件
+ConversationBufferMemory
+ConversationbufferWindowMemory
+ConversationTokenBufferMemory
+ConversationEntityMemory
+ConversationKGMemory
+CombinedMemory
+
+SQLChatMessageHistory
+MongoDBChatMessageHistory
+DynamoDBChatMessageHistory
+
+
 
 
 
