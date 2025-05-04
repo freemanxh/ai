@@ -212,6 +212,35 @@ StuffDocumentsChain
 
 ConstitutionalChain :输出遵循一定原则的链。
 
+数据库操作：
+from langchain_community.chat_models import ChatOllama
+from langchain_community.utilities.sql_database import SQLDatabase
+from langchain.agents import create_sql_agent
+from langchain.agents.agent_toolkits import SQLDatabaseToolkit
+
+import os
+from dotenv import load_dotenv
+load_dotenv()
+
+db=SQLDatabase.from_uri("sqlite:///Chinook_Sqlite.sqlite")
+ollamaLlm = ChatOllama(model=os.getenv("OLLAMA_MODEL"), base_url=os.getenv("OLLAMA_URL"))
+
+# 创建工具包
+toolkit = SQLDatabaseToolkit(db=db, llm=ollamaLlm)
+
+# 创建代理
+agent_executor = create_sql_agent(
+    llm=ollamaLlm,
+    toolkit=toolkit,
+    verbose=True
+)
+
+# 执行自然语言查询
+response = agent_executor.run("How many employees are there?")
+print(response)
+
+
+
 
 
 
