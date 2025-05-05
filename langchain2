@@ -273,10 +273,28 @@ DynamoDBChatMessageHistory
 
 7、Agent模块 
 Agent核心是用大模型推理引擎能力，并根据这些推理来决定如何与外部工具交互及采取何种行动，效能和状态很大程度上都依赖于使用的提示词策略。故，Agent组件与工具密不可分。
- 内置不同类型的Agent组件、Tools组件、Toolkits组件和AgentExecutor组件。
+内置不同类型的Agent组件：负责做计划决策，制定执行计划表
+Tools组件、
+Toolkits组件
+AgentExecutor组件：负责执行
+
+React(Reasoning and Acting 推理与行动) 使用大语言模型来选择合适的工具组件。然后，Agent组件执行选定的工具组件的操作，并观察结果。这些结果再次被反馈给大语言模型进一步的分析与决策。这个过程持续进行，直到达到某个停止条件。
 
 ReAct框架的提示词策略。  （思考|行动|行动输入|观察可以重复N次）
 提示词模板  输出解析器  工具集
+
+Agent组件的类型
+ZERO_SHOT_REACT_DESCRIPTION #根据工具描述选择工具组件
+STRUCTURED_CHAT_ZERO_SHOT_REACT_DESCRIPTION #
+CONVERSATIONAL_REACT_DESCRIPTION
+CHAT_ZERO_SHOOT_REACT_DESCRIPTION
+CHAT_CONVERSATIONAL_REACT_DESCRIPTION
+SELF_ASK_WITH_SEARCH
+REACT_DOCSTORE
+
+对于内置的Agent组件类型，简化方法 initialize_agent, 不需要创建Agent组件实例，也不需要显示创建AgentExcecutor。
+agent=initialize_agent(tools,llm,agent=AgentType.ZERO_SHOT_REACT_DESCRIPTION,verbose=True)
+
 
 
 
