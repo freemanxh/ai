@@ -295,6 +295,15 @@ REACT_DOCSTORE
 对于内置的Agent组件类型，简化方法 initialize_agent, 不需要创建Agent组件实例，也不需要显示创建AgentExcecutor。
 agent=initialize_agent(tools,llm,agent=AgentType.ZERO_SHOT_REACT_DESCRIPTION,verbose=True)
 
+简单ReAct Agent实践
+
+llm=OpenAI()
+#加载内置的工具
+tools=load_tools(["serpapi","llm-math"],llm=llm)
+agent=initialize-agent(tools,llm,agent=AgentType.ZERO_SHOT_REACT_DESCRIPTION,verbose=True)
+agent.run("Who is Leo DiCaprio's girlfriend? What is her current age raised to the 0.43 power?")
+
+
 
 
 
