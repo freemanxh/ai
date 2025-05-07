@@ -392,6 +392,23 @@ test1=chain.run("你好，我是徐辉，我住在上海浦东，我的邮箱是
 句子嵌入模型：BERT Doc2Vec
 
 
+10、集成
+Langchain 的核心组件
+Callbacks:
+LLM包装器:
+Document loaders: 文档加载与处理
+Document transformers: 针对文档的处理和转换
+聊天模型包装器：
+Memory:
+Retrievers: 信息检索
+嵌入模型包装器：
+Agent toolkit:
+Tools:
+Vector store:
+Grouped by provider:
+
+
+
 
 
 
