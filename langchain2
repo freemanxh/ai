@@ -315,6 +315,45 @@ tools=load_tools(["serpapi","llm-math"],llm=llm)
 agent=initialize-agent(tools,llm,agent=AgentType.ZERO_SHOT_REACT_DESCRIPTION,verbose=True)
 agent.run("Who is Leo DiCaprio's girlfriend? What is her current age raised to the 0.43 power?")
 
+8、回调处理器
+允许开发者在特定事件发生时执行自定义操作的机制。
+目的：提供一个统一、模块化和可重用的机制，使开发者能够更轻松为链组件和Agent组件添加各种回调功能。
+模块化与可重用性、灵活性、与其他组件紧密集成、可维护性。
+
+核心：
+callbacks=[]:提供具体的回调处理列表。
+run_manager:管理和触发回调事件。
+
+过程：
+开始执行链组件阶段：
+链组件执行中阶段：
+触发回调阶段：
+完成队段：
+
+BaseCallbackHandler
+LLM事件
+on_llm_start
+on_llm_new_token
+on_llm_end
+on_llm_error
+
+on_chat_model_start
+
+on_chain_start
+on_chain_end
+on_chain_error
+
+on_tool_start
+on_tool_end
+on_tool_error
+
+on_text
+on_agent_action
+on_agent_finish
+
+
+
+
 
 
 
