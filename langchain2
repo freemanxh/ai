@@ -1,3 +1,15 @@
+import os
+from dotenv import load_dotenv
+
+ollamaEmbedding = OllamaEmbeddings(model=os.getenv("OLLAMA_EMBEDDING"), base_url=os.getenv("OLLAMA_URL"))
+ollama = ChatOllama(model=os.getenv("OLLAMA_MODEL"), base_url=os.getenv("OLLAMA_URL"))
+
+.env
+OLLAMA_EMBEDDING=bge-m3:latest
+OLLAMA_URL=http://192.168.0.6:11434
+OLLAMA_MODEL=qwen3:14b
+
+
 1、模型I/O组件
 1.1、模型包装器：通过接口调用大语言模型 
   1.1.1、LLM模型包装器 （字符串） BaseLLM 2023年7月之前。
