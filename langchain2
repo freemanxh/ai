@@ -366,6 +366,31 @@ ChatPDF
 ChatDoc
 
 
+==========================================================
+create_tagging_chain
+create_tagging_chain_pydantic
+
+class PersonalDetails(BaseModel):
+  name: str=Field(
+    ...,
+    description= "这里是用户输入的名字"
+  )
+  city: str=Field(
+    ...,
+    description= "这是用户输入的居住城市"
+  )
+  email: str=Field(
+    ...,
+    description= "这是用户输入的邮箱地址"
+  )
+
+chain=create_tagging_chain_pydantic(PersonalDetails,llm)
+test1=chain.run("你好，我是徐辉，我住在上海浦东，我的邮箱是:liteali1987@XX.com")
+
+
+词嵌入模型：Word2Vec GloVe
+句子嵌入模型：BERT Doc2Vec
+
 
 
 
