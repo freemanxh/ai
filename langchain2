@@ -1,3 +1,5 @@
+tiktoken库用于计算字符串中token数的工具。
+
 import os
 from dotenv import load_dotenv
 
@@ -350,6 +352,22 @@ on_tool_error
 on_text
 on_agent_action
 on_agent_finish
+
+
+大语言模型是基于概率的模型，它预测下一个词的可能性是基于训练数据中的统计信息。当模型为生成文本时，它实际上是在每个步骤中做出基于概率的决策。
+
+引入外部数据：
+1、大模型之前，只能依赖搜索。
+2、补充知识。
+3、修复幻觉。
+
+著名应用
+ChatPDF 
+ChatDoc
+
+
+
+
 
 
 
