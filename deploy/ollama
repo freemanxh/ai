@@ -74,5 +74,6 @@ ollama create llama3-Chinese:8B -f Modelfile
 
 
 ==============================================================
-部署openwebui
+部署openwebui （记得把目录中的数据从原始容器中给cp出来）
 docker run -d -p 3004:8080 -e OLLAMA_BASE_URL=http://192.168.0.65:11434 -v ./open-webui-4/backend_data/:/app/backend -v ./open-webui-4/build:/app/build  --name open-webui-4 --restart always ghcr.io/open-webui/open-webui:main
+docker run -d -p 3001:8080 -e OLLAMA_BASE_URL=http://192.168.0.65:11434 -v ./open-webui-1/backend_data/:/app/backend -v ./open-webui-1/build:/app/build  --name open-webui-1 --restart always ghcr.io/open-webui/open-webui:main
