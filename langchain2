@@ -387,9 +387,18 @@ class PersonalDetails(BaseModel):
 chain=create_tagging_chain_pydantic(PersonalDetails,llm)
 test1=chain.run("你好，我是徐辉，我住在上海浦东，我的邮箱是:liteali1987@XX.com")
 
-
+文本嵌入：
 词嵌入模型：Word2Vec GloVe
+良好的词嵌入：1）相似的词应对应于接近的点（等效地对应于相似的分数）2）不同的词对应于相隔较远的点（等效地对应于明显不同的分数）
 句子嵌入模型：BERT Doc2Vec
+
+点积相似性：嵌入向量的点积大，相似度高，点积小，相似度低。
+余弦相似性：基于向量间的夹角来衡量它们之间的相似度。适用于评估高维空间中的数据点之间的相似度。夹角越小，越相似。
+
+注意力机制：准确处理多义词。此机制可以根据上下文为单词提供特定的向量，从而为单词提供上下文信息。为每个词提供一个上下文相关的向量。
+
+
+
 
 
 10、集成
@@ -406,6 +415,20 @@ Agent toolkit:
 Tools:
 Vector store:
 Grouped by provider:
+
+向量数据库：
+chroma
+pinecone
+milvus
+
+
+cohere
+
+CSVAgent
+PandasAgent
+PowerBIAgent
+
+
 
 
 
