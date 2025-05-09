@@ -485,6 +485,17 @@ VectorStore
 
 
 
+OpenAI的主要应用场景
+1、内容生成
+2、摘要
+3、分类、归类和情感分析
+4、数据提取
+5、翻译
+
+https://github.com/openai/openai-quickstart-node
+https://github.com/openai/openai-quickstart-python
+
+
 
 
 
