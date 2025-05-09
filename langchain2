@@ -397,6 +397,19 @@ test1=chain.run("你好，我是徐辉，我住在上海浦东，我的邮箱是
 
 注意力机制：准确处理多义词。此机制可以根据上下文为单词提供特定的向量，从而为单词提供上下文信息。为每个词提供一个上下文相关的向量。
 
+Transformer模型
+1.标记化：token
+2.嵌入：
+3.位置编码：保持原始的位置信息。
+4.Transformer block：每个block包含（注意力组件和前馈组件）
+5.注意力机制：为每个单词提供上下文信息。多头注意力机制，使用多个嵌入来修改向量并为它们添加上下文。
+6.Softmax层：Transformer模型为所有单词输出分数，并为句子中最可能的下一个单词给出最高分数。Softmax层的作用是将这些分数转化为概率值。
+7.后训练：在整体训练完成后，再对模型进行特定任务的训练。
+
+语义搜索：文本嵌入与相似度计算。1）文本嵌入将单词转换为向量。2）使用相似性来找到响应中与查询对应的向量最相似的向量。3）输出与这个最相似的向量对应的响应。
+
+
+
 
 
 
@@ -427,6 +440,51 @@ cohere
 CSVAgent
 PandasAgent
 PowerBIAgent
+
+
+11、NLP与机器学习基础
+N-Gram：基于训练的概率模型，可以估计文本中词序列的概率分布。
+Logistic回归：文本分类任务算法。
+贝叶斯：使用概率预测输出类别的可能性的监督算法，使用贝叶斯定理。
+markov：程序序列数据，预测随机变量序列的概率。
+
+文本预处理
+1）文本数据清理：
+Tokenization-=
+Normalization(规范化) 相似含义的多个单词标准化的过程，转化为单一的规范形式。
+Stop Word Removal
+Stemming(词干提取) 通过移除词的前缀和后缀来清理文本数据
+Lemmatization(词形还原) 将一个词的各种曲折形式转化为基基本形式或词典形式。
+2）从文本到向量的转换
+文本向量化：为机器学习算法提供数值输入
+One Hot Encoding（一热编码）：采用文本数据中的唯一单词并为每个单词生成向量。
+Count Vectorizers（计数向量化器）：能捕获单词在文本数据中的出现概率。
+Bag of Words（词袋模型）：提取文本数据特征的方法，不考虑单词出现的顺序。
+N-Gram（N元模型）： 代表句子中彼此相邻的一系列单词或标记。
+TF-IDF(词频-逆文档频率)：表示单词在文本中重要性的频率。
+3）构建分类器
+为输入数据分配一个类别或类。
+评估：准确度、精确度、召回率、F1得分。
+
+12、LangChain框架中的主要类
+BasePromptTemplate
+BaseLLM
+BaseChatModel
+BaseCallbackManager
+Embeddings
+Agent
+AgentExecutor
+Chain
+BaseLoader
+BaseChatMemory
+StructuredOutputParser
+  ArxivRetriever
+BaseTool
+  GoogleSerperAPIWrapper
+VectorStore
+
+
+
 
 
 
