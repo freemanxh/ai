@@ -258,6 +258,60 @@ watch nvidia-smi
 ]
 
 
+#更新dataset_info.json文件
+~/LLaMA-Factory/data/dataset_info.json文件：
+"my_demo": {
+    "file_name": "my_demo.json"
+},
+
+开始tune
+1、模型名称选择模型
+2、数据集那儿选数据集
+3、学习率那儿调整学习率
+
+
+学习率 5e-4 调大 从-5到-4
+训练轮数增加或减少
+
+
+
+测试微调效果：
+1、选择模型
+2、选择检查点
+3、加载模型
+
+
+
+
+
+改源码问题：
+vscode 装 remote-ssh(ms)的plug-inc  #可以改远程上的文件
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+修复一个bug ，打开/home/llm_course/chinese-LLaMA-Alpaca-3-3.0/scripts/oai_api_demo/openai_api_server.py文件，
+def stream_pedict(中 增加两行
+pad_token_id=tokenizer.eos_token_id,
+eos_token_id=[tokenizer.eos_token_id,tokenizer.convert_tokens_to_ids("<|eot_id|>")]
+
+
+
+
+
+
+
+
 
 
 
