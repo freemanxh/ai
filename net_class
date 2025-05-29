@@ -281,6 +281,17 @@ watch nvidia-smi
 3、加载模型
 
 
+启动接口：
+llamafactory-cli api --model_name_or_path /root/autodl-tmp/modelscope/hub/Z
+hipuAI/glm-4-9b-chat --template glm4 --adapter_name_or_path saves/GLM-4-9B-
+Chat/lora/train_2024-08-31-17-56-13 --finetuning_type lora
+
+设置隧道
+ssh -CNgv -L 8000:127.0.0.1:8000 root@connect.cqa1.seetacloud.com -p 51363
+
+nextchat 客户端
+
+
 
 
 
