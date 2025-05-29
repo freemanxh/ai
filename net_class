@@ -291,6 +291,22 @@ ssh -CNgv -L 8000:127.0.0.1:8000 root@connect.cqa1.seetacloud.com -p 51363
 
 nextchat 客户端
 
+测试命令行
+curl http://127.0.0.1:8000/v1/chat/completions \
+-H "Content-Type: application/json" \
+-H "Authorization: Bearer x" \
+-d '{
+"model": "glm4-9b-chat",
+"messages": [
+{
+"role": "user",
+"content": "1+1
+"
+}
+],
+"max_tokens": 4096
+}'
+
 
 
 
