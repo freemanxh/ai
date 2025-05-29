@@ -20,6 +20,10 @@ Agnet的目的，为了处理那些简单的语言模型可能无法直接解决
 需要思考任务何时可以终止。
 
 
+#将DataFrame转换为JSON格式,orient='split'参数将数据、索引和列分开存储
+df_complex_json = df_complex.to_json(orient='split')
+
+
 --------------------------------------------------------------------------------------------------
 
 memory = ConversationBufferMemory(
