@@ -88,5 +88,33 @@ stage: sft #微调的方法
 do_train: true 
 
 
+2.1.2 推理使用配置
+inference/llama3_lora_sft.yaml
+
+model_name_or_path: /root/autodl-tmp/LLaMA-Factory/Meta-Llama-3.1-8B-Instruct #原始模型
+adapter_name_or_path: saves/llama3.1-8b-instruct/lora/sft #微调后的数据
+template: llama3
+finetuning_type: lora
+
+2.1.3 合并模型与微调数据
+### Note: DO NOT use quantized model or quantization_bit when merging lora adapters
+
+### model
+model_name_or_path: /root/autodl-tmp/LLaMA-Factory/Meta-Llama-3.1-8B-Instruct
+adapter_name_or_path: saves/llama3.1-8b-instruct/lora/sft
+template: llama3
+finetuning_type: lora
+
+### export
+export_dir: models/llama3.1_8b_instruct_lora_sft
+export_size: 2
+export_device: cpu
+export_legacy_format: false
+
+
+2.2.1 微调
+llamafactory-cli train examples/train_lora/llama3_lora_sft.yaml
+
+
 
 
