@@ -52,7 +52,7 @@ template: llama3 #使用的模板
 cutoff_len: 1024 #输入的最大长度
 max_samples: 1000 #最大样本数
 overwrite_cache: true 
-preprocessing_num_workers: 16
+preprocessing_num_workers: 16 #使用训练线程的数量
 
 ### output #输入目录和其他输出相关的设置
 output_dir: saves/llama3.1-8b-instruct/lora/sft
@@ -86,5 +86,7 @@ model：指定了模型的路径和名称
 method:微调的方法 
 stage: sft #微调的方法
 do_train: true 
+
+
 
 
