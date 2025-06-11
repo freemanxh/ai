@@ -1,3 +1,90 @@
 指令监督微调 Supervised finetuning (SFT)
 奖励模型训练 Reward model Training (RLHF)
 LoRA Low-Rank Adaptation，LoRA 参数高效微调方法，  低秩
+
+所需环境：
+pytorch 2.1.0 
+python 3.10 ubuntu 22.04
+cuda 12.1
+
+3080x2 or 3090x1
+mem：48G
+
+安装过程
+conda create -n llama_factory python=3.10
+conda activate llama_factory
+
+git clone --depth 1 https://github.com/hiyouga/LLaMA-Factory.git
+#git clone --depth 1 https://bgithub.xyz/hiyouga/LLaMA-Factory.git
+
+cd LLaMA-Factory
+pip install -e ".[torch,metrics]"
+-e：以”开发模式“安装，对代码的任何更改都会立即反映在安装的包中，不需要重新安装。
+[torch,metrics]：对包的特定依赖进行安装，指定两个额外的依赖：torch和metrice。
+
+用llmafactory-cli version进行校验安装是否成功。
+
+配置huggingface api 镜像
+export HF_HOME=/root/autodl-tmp/huggingface-cache/
+export HF_ENDPOINT=https://hf-mirror.com
+
+下载模型
+pip install modelscope
+modelscope download --model=LLM-Research/Meta-Llama-3.1-8b-Instruct --local_dir Meta-Llama-3.1-8B-Instruct
+
+
+2.1 修改文件
+2.1.1 train_lora/llama3_lora_sft.yaml
+文件位置：./LLaMA-Factory/examples/train_lora/
+
+### model
+model_name_or_path: /root/autodl-tmp/LLaMA-Factory/Meta-Llama-3.1-8B-Instruct #模型名称或路径
+
+### method
+stage: sft #微调的方法（可选: rm(reward modeling), pt(pretrain), sft(Supervised Fine-Tuning), PPO, DPO, KTO, ORPO）
+do_train: true #是否进行训练 (true用于训练, false用于评估)
+finetuning_type: lora #使用lora技术 (可选: freeze, lora, full)
+lora_target: all #目标模型中的所有参数 (默认值为 all)
+
+### dataset #训练数据集
+dataset: identity,alpaca_en_demo #数据集的名称 (使用”,”分隔多个数据集)
+template: llama3 #使用的模板
+cutoff_len: 1024 #输入的最大长度
+max_samples: 1000 #最大样本数
+overwrite_cache: true 
+preprocessing_num_workers: 16
+
+### output #输入目录和其他输出相关的设置
+output_dir: saves/llama3.1-8b-instruct/lora/sft
+logging_steps: 10 #日志记录的步数
+save_steps: 500 #保存模型的步数
+plot_loss: true #是否绘制损失图
+overwrite_output_dir: true #是否覆盖输出目录
+
+### train #训练过程中的设置
+per_device_train_batch_size: 1 #每个设备上的批次大小
+gradient_accumulation_steps: 8 #梯度累积的步数
+#max_grad_norm: x #梯度裁剪阈值
+learning_rate: 1.0e-4 #学习率
+num_train_epochs: 3.0 #训练的轮数
+lr_scheduler_type: cosine #学习率调度器的类型，也叫学习率曲线 （可选 linear, cosine, polynomial, constant 等）
+#num_train_epochs: #训练周期数
+warmup_ratio: 0.1 #学习率预热比例
+#warmup_steps: x #学习率预热步数
+bf16: true #是否使用bf16精度
+ddp_timeout: 180000000 #分布式数据并行（DDP）的超时时间
+
+
+### eval #评估的设置
+val_size: 0.1 #验证集的大小
+per_device_eval_batch_size: 1 #每个设备上的评估批次大小
+eval_strategy: steps #评估策略
+eval_steps: 500 #评估的步数
+
+
+model：指定了模型的路径和名称
+method:微调的方法 
+stage: sft #微调的方法
+do_train: true 
+
+
