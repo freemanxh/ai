@@ -5,6 +5,101 @@ https://llamafactory.readthedocs.io/zh-cn/latest/index.html
 奖励模型训练 Reward model Training (RLHF)
 LoRA Low-Rank Adaptation，LoRA 参数高效微调方法，  低秩
 
+
+1.1.2 运算精度
+1.1.2.1 16比特（半精度浮点数）全参数微调：指的是在微调过程中对模型的所有参数进行训练，并使用16比特的精度（通常是FP16，即半精度浮点数）来存储和计算模型权重。
+全参数微调（Full Parameter Fine-tuning）：
+  ○ 全参数微调指的是对模型的所有参数进行更新。与此相对的是参数高效微调方法，只调整部分参数，保持其他参数冻结。
+  ○ 在全参数微调中，模型的所有权重都在微调数据上进行学习调整，以适应新的任务或数据分布。
+16比特精度（FP16）：
+  ○ 16比特精度表示模型权重和梯度在计算时采用16位浮点数表示，取代传统的32位浮点数。
+  ○ 16比特浮点数需要的存储空间更小，计算速度也更快，因此可以显著节省显存和加快计算速度。
+  ○ FP16在训练过程中能有效减少内存占用，适合处理大型模型的全参数微调。
+混合精度训练：
+  16比特全参数微调通常采用混合精度训练（Mixed Precision Training），即在计算过程中使用16位浮点数表示大部分参数和操作，但在一些关键计算（如反向传播中的梯度累加）上使用32位浮点数，以保证稳定性和精度。
+
+
+1.1.3 加速算子
+1.1.3.1 FlashAttention-2
+FlashAttention2是一种针对GPU优化的自注意力机制算法，旨在提高计算效率并减少内存使用。它是FlashAttention的改进版本，通过一系列工程优化，使得在GPU上的计算性能得到显著提升
+
+1.1.3.2 Unsloth
+Unsloth是一个开源的大语言模型（LLM）微调加速工具，它能够显著提高微调的速度和效率，同时大幅降低内存占用。
+
+1.1.4 推理引擎
+1.1.4.1 Transformers （modelscope）
+
+from transformers import AutoTokenizer, AutoModel
+
+tokenizer = AutoTokenizer.from_pretrained("google-bert/bert-base-uncased")
+model = AutoModel.from_pretrained("google-bert/bert-base-uncased")
+
+inputs = tokenizer("Hello world!", return_tensors="pt")
+outputs = model(**inputs)
+
+1.1.4.2 vLLM
+vLLM是一个专为大规模语言模型（LLM）推理优化的服务框架和推理引擎。它通过一系列技术创新，显著提高了推理效率，降低了内存占用，特别适合处理需要高吞吐量和低延迟的NLP任务。
+from vllm import LLM, SamplingParams
+
+prompts = [
+    "Hello, my name is",
+    "The president of the United States is",
+    "The capital of France is",
+    "The future of AI is",
+]
+sampling_params = SamplingParams(temperature=0.8, top_p=0.95)
+
+llm = LLM(model="facebook/opt-125m")
+
+outputs = llm.generate(prompts, sampling_params)
+
+for output in outputs:
+    prompt = output.prompt
+    generated_text = output.outputs[0].text
+    print(f"Prompt: {prompt!r}, Generated text: {generated_text!r}")
+
+
+
+
+1.1.5 实验面板
+1.1.5.1 LlamaBoard
+LlamaBoard 的主要特点包括：
+1. 轻松配置：用户可以通过与Web界面的交互来自定义微调参数，并为大多数参数提供默认值，简化了配置过程。
+2. 可监控的训练：训练过程中，训练日志和损失曲线被可视化并实时更新，使用户能够监控训练进度。
+3. 灵活评估：支持计算数据集上的文本相似度分数以自动评估模型，或通过与模型聊天进行人工评估。
+4. 多语言支持：提供本地化文件，方便集成新语言以渲染界面。目前支持英语、俄语和中文，允许更广泛的用户使用LlamaBoard进行大模型的微调 。
+
+1.1.5.2 TensorBoard
+TensorBoard的主要功能包括：
+1. 损失和准确度曲线：TensorBoard可以绘制训练和验证过程中的损失和准确度等关键指标的曲线图，帮助用户监控模型的学习进度。
+2. 权重和激活直方图：它可以显示模型中权重和激活的分布情况，这有助于识别模型是否出现了梯度消失或梯度爆炸等问题。
+3. 高维数据可视化：TensorBoard支持t-SNE和PCA等降维技术，可以将高维数据投影到二维或三维空间中进行可视化。
+4. 图像和视频可视化：在处理图像或视频数据时，TensorBoard可以显示批次中的图像或帧，以及模型生成的图像。
+5. 注意力机制可视化：对于使用注意力机制的模型，如Transformer，TensorBoard可以可视化注意力权重，帮助理解模型是如何关注输入序列的不同部分的。
+6. 模型图：TensorBoard可以显示模型的计算图，包括层、操作和张量，这有助于理解模型的结构和数据流向。
+7. 自定义仪表板：用户可以创建自定义的仪表板来展示特定的信息或指标。
+
+1.1.5.3 Wandb
+Wandb（Weights & Biases）是一个强大的机器学习实验跟踪和可视化工具，它提供了一种简便的方法来记录和监控模型训练过程中的各种指标，包括超参数、训练和验证损失、准确率等。
+1. 实验跟踪和版本控制：Wandb可以记录和跟踪机器学习实验，包括超参数、指标、模型架构等，帮助复现模型和进行版本管理 。
+2. 可视化和分析：提供丰富的可视化工具，可以直观地展示实验结果、训练曲线、指标趋势等，支持创建交互式图表、散点图、直方图等 。
+3. 模型登记和部署：帮助登记和管理训练的模型，包括模型文件、权重和元数据，便于共享和部署模型。
+4. 协作和共享：提供团队协作功能，可以邀请团队成员参与实验、查看结果，并进行讨论和反馈。
+5. 集成和兼容性：与常用的机器学习框架（如PyTorch、TensorFlow、Scikit-learn等）以及其他工具（如Jupyter Notebook、Docker等）具有良好的集成和兼容性 。
+6. 数据和模型管理：提供数据和模型备份管理功能，支持数据集和模型版本化 。
+7. 超参数搜索：Wandb提供了超参数搜索功能，帮助优化模型性能 。
+8. 本地部署：Wandb还提供本地服务器部署功能，允许在没有互联网连接的情况下使用 。
+
+1.1.5.4 MLflow
+MLflow是一个开源的机器学习生命周期管理平台，它提供了一套工具来简化机器学习工作流程。MLflow的主要目标是帮助数据科学家和ML工程师在整个机器学习项目的开发、部署和管理过程中提高效率和一致性。
+1. MLflow Tracking：这是MLflow的一个核心组件，提供了API和用户界面，用于记录机器学习过程中的参数、代码版本、指标和输出文件。这使得团队可以追踪模型的演变，并比较不同运行的结果 。
+2. MLflow Projects：MLflow Projects允许用户将机器学习代码打包成可重用和可重现的格式，类似于可执行程序。这使得其他用户可以轻松地再次运行这些项目，并可靠地重现结果 。
+3. MLflow Models：MLflow提供了一种简单的模型封装格式，允许用户将模型部署到多种模型服务和推理平台。例如，可以将模型封装为Python函数，并将其部署到Docker或Azure ML进行线上服务 。
+4. MLflow Model Registry：这是一个集中式模型存储库，提供了API和用户界面，用于协作管理MLflow模型的完整生命周期。它包括模型版本控制、别名、标签和注释，有助于处理不同版本的模型，并确保它们的顺利生产化 。
+5. 实验管理：允许用户记录和比较不同实验中的模型性能、参数和指标 。
+6. 部署一致性：提供了标准化的方式来打包和部署模型，确保了从开发到生产的一致性 。
+
+
 所需环境：
 pytorch 2.1.0 
 python 3.10 ubuntu 22.04
