@@ -1,0 +1,3 @@
+指令监督微调 Supervised finetuning (SFT)
+奖励模型训练 Reward model Training (RLHF)
+LoRA Low-Rank Adaptation，LoRA 参数高效微调方法，  低秩
