@@ -1,0 +1,2 @@
+nohup ssh -CNg -L 11434:127.0.0.1:11434 root@connect.westc.gpuhub.com -p 39566 > ssh_tunnel.log 2>&1 &
+
